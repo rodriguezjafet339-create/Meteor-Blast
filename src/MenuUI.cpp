@@ -14,7 +14,7 @@ float playButtonWidth = 200.f;
 float playButtonHeigth = 100.f;
 this ->playButton.setSize(sf::Vector2f(playButtonWidth, playButtonHeigth));
 this ->playButton.setFillColor(sf::Color::Green);
-this ->playButton.setPosition ((500 - playButtonWidth)/2, (950 - playButtonHeigth)/2);
+this ->playButton.setPosition ((this->window.getSize().x - playButtonWidth)/2, (this->window.getSize().y - playButtonHeigth)/2);
 
 if(!this ->playFont.loadFromFile("Fonts/BitcountGridDouble-Regular.ttf")){
     std::cout <<"Error in inMenu function"<<"\n";
@@ -33,6 +33,7 @@ MenuUI::MenuUI(sf::RenderWindow& window)
 {
     //ctor
     this ->inPlayButton();
+    this ->inPauseMenu();
 }
 
 MenuUI::~MenuUI()
@@ -85,4 +86,27 @@ void MenuUI::renderMenu () {
 this ->window.clear();
 this ->renderPlayButton(this ->window);
 this ->window.display();
+}
+//---------------------------------------------------------
+
+void MenuUI::inPauseMenu () {
+float ButtonWidth = 350.f;
+float ButtonHeigth = 80.f;
+this ->returnToMenuButton.setSize(sf::Vector2f(ButtonWidth, ButtonHeigth));
+this ->returnToMenuButton.setFillColor(sf::Color::Green);
+this ->returnToMenuButton.setPosition ((this->window.getSize().x - ButtonWidth)/2, (this->window.getSize().y - ButtonHeigth)/2);
+
+if(!this ->returnToMenuFont.loadFromFile("Fonts/BitcountGridDouble-Regular.ttf")){
+    std::cout <<"Error in inMenu function"<<"\n";
+}
+this ->returnToMenuText.setFont(this -> returnToMenuFont);
+this ->returnToMenuText.setCharacterSize(30);
+this ->returnToMenuText.setFillColor(sf::Color::White);
+this ->returnToMenuText.setString("Return to Main Menu");
+this ->centerTextInShape(this ->returnToMenuText, this ->returnToMenuButton);
+}
+
+void MenuUI::renderReturnToMenuButton(sf::RenderTarget& target) {
+target.draw(this->returnToMenuButton);
+target.draw (this->returnToMenuText);
 }

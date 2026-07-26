@@ -22,6 +22,10 @@ class MenuUI
        sf::Text playText;
        sf::Font playFont;
 
+       sf::RectangleShape returnToMenuButton;
+       sf::Text returnToMenuText;
+       sf::Font returnToMenuFont;
+
        //mouse positions
        sf::Vector2i mousePosWindow;
        sf::Vector2f mousePosView;
@@ -39,6 +43,9 @@ class MenuUI
         void menuEvents ();
         void renderMenu ();
         void updateMenu ();
+
+        void inPauseMenu();
+        void renderReturnToMenuButton(sf::RenderTarget& target);
 };
 
 #endif // MENUUI_H

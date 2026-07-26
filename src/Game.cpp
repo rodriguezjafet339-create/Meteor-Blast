@@ -5,6 +5,7 @@ click is out of the windows bounds
 -integer overflow prevention
 */
 
+
 //private functions
 void Game::inVariables(){
 //game logic
@@ -50,7 +51,7 @@ void Game::inEnemies(){
 //--------------------------------------------------------------
 //constructors|destructors
 Game::Game(sf::RenderWindow& window)
-: window(window)
+: window(window), menuUI (window)
 {
     //ctor
     this ->inVariables();
@@ -216,6 +217,7 @@ if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 //--------------------------------------------------------------
 void Game::update(){
     this -> pollEvents();
+    this ->updateMP();
 
     //time increases 10% every 6 seconds
 
@@ -226,7 +228,6 @@ void Game::update(){
 
 
     if (this ->endGame == false) {
-    this ->updateMP();
     this ->updateText();
     this ->updateEnemies(dt);
     }
@@ -235,7 +236,6 @@ void Game::update(){
         this ->endGame = true;
     }
     }
-
 }
 //--------------------------------------------------------------
 void Game::startGame() {
@@ -267,5 +267,10 @@ this ->renderEnemies(this ->window);
 
 this ->renderText(this ->window);
 
+if (isPaused) {
+    menuUI.renderReturnToMenuButton(this -> window);
+}
+
 this -> window.display();
+
 }

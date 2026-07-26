@@ -5,6 +5,7 @@
 #include <vector>
 #include <ctime>
 #include <sstream>
+#include <MenuUI.h>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -15,6 +16,7 @@
 //game engine class?
 class Game
 {
+    MenuUI menuUI;
     public:
         //variables
         //window
@@ -43,6 +45,7 @@ class Game
        float currentSpeed;
        sf::Clock pauseClock;
        sf::Time totalPausedTime;
+
 
        //resources
        sf::Font font;
