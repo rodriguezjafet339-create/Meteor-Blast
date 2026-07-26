@@ -32,9 +32,14 @@ class MenuUI
 
        bool pressedPlay = false;
        bool mouseHeld = false;
+       bool returnMainRequested = false;
 
         MenuUI(sf::RenderWindow& window);
         virtual ~MenuUI();
+
+
+        //accessors
+        const bool getReturnToMenu() const;
 
         void inPlayButton();
         void centerTextInShape(sf::Text& text, const sf::Shape& shape);
@@ -46,6 +51,8 @@ class MenuUI
 
         void inPauseMenu();
         void renderReturnToMenuButton(sf::RenderTarget& target);
+        void updateReturnButton ();
+        void resetReturnMainRequest();
 };
 
 #endif // MENUUI_H

@@ -105,7 +105,30 @@ this ->returnToMenuText.setFillColor(sf::Color::White);
 this ->returnToMenuText.setString("Return to Main Menu");
 this ->centerTextInShape(this ->returnToMenuText, this ->returnToMenuButton);
 }
+//-------------------------------------------------------------
+const bool MenuUI::getReturnToMenu () const {
+    return this->returnMainRequested;
+}
+//------------------------------------------------------------------
+void MenuUI::resetReturnMainRequest() {
+this ->returnMainRequested = false;
+}
+//------------------------------------------------------------------
+void MenuUI::updateReturnButton() {
+this ->updateMP();
+if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (this ->mouseHeld == false) {
+                this ->mouseHeld = true;
+        if (this -> returnToMenuButton.getGlobalBounds().contains (this ->mousePosView)) {
+            this -> returnMainRequested = true;
+        }
+        }
+    } else {
+    this ->mouseHeld = false;
+    }
 
+}
+//---------------------------------------------------------------
 void MenuUI::renderReturnToMenuButton(sf::RenderTarget& target) {
 target.draw(this->returnToMenuButton);
 target.draw (this->returnToMenuText);

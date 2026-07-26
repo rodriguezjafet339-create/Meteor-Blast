@@ -26,18 +26,51 @@ int main() {
     Game game(window);
     MenuUI menu (window);
 
-    while (window.isOpen() && !menu.pressedPlay) {
-        menu.updateMenu();
-        menu.renderMenu();
+//    while (window.isOpen() && !menu.pressedPlay) {
+//        menu.updateMenu();
+//        menu.renderMenu();
+//    }
+//
+//    game.startGame();
+//
+//    while (game.running() && !game.getEndGame()) {
+//        game.update();
+//        game.render();
+//
+//    }
+
+    while (window.isOpen()) {
+
+        // --- Menu phase ---
+        while (window.isOpen() && !menu.pressedPlay) {
+            menu.updateMenu();
+            menu.renderMenu();
+        }
+
+        if (!window.isOpen()) break;
+
+        // --- Game phase ---
+        game.startGame();
+
+        while (game.running() && !game.getEndGame() && !game.getReturnToMenu()) {
+            game.update();
+            game.render();
+        }
+
+        if (!window.isOpen()) break;
+
+        if (game.getEndGame()) {
+            // for now, just exit like before
+            break;
+        }
+
+        if (game.getReturnToMenu()) {
+            // loop back to menu — reset everything for next time
+            game.resetGame();
+            menu.pressedPlay = false;
+        }
     }
 
-    game.startGame();
-
-    while (game.running() && !game.getEndGame()) {
-        game.update();
-        game.render();
-
-    }
     return 0;
 }
 

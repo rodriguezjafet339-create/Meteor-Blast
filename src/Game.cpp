@@ -236,6 +236,10 @@ void Game::update(){
         this ->endGame = true;
     }
     }
+
+    if (isPaused) {
+        menuUI.updateReturnButton();
+    }
 }
 //--------------------------------------------------------------
 void Game::startGame() {
@@ -273,4 +277,14 @@ if (isPaused) {
 
 this -> window.display();
 
+}
+//---------------------------------------------------------
+void Game::resetGame() {
+this->inVariables();
+this->enemies.clear();
+menuUI.resetReturnMainRequest();
+}
+//----------------------------------------------
+const bool Game::getReturnToMenu () const {
+    return this->menuUI.getReturnToMenu();
 }

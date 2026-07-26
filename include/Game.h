@@ -64,7 +64,6 @@ class Game
        void inEnemies();
 
 
-    public:
         //constructors and destructors
         Game(sf::RenderWindow& window);
         virtual ~Game();
@@ -87,6 +86,9 @@ class Game
     void renderText (sf::RenderTarget& target);
     void renderEnemies(sf::RenderTarget& target);
     void render();
+    const bool getReturnToMenu () const;
+
+    void resetGame ();
 
 
 };
