@@ -26,21 +26,7 @@ int main() {
     Game game(window);
     MenuUI menu (window);
 
-//    while (window.isOpen() && !menu.pressedPlay) {
-//        menu.updateMenu();
-//        menu.renderMenu();
-//    }
-//
-//    game.startGame();
-//
-//    while (game.running() && !game.getEndGame()) {
-//        game.update();
-//        game.render();
-//
-//    }
-
     while (window.isOpen()) {
-
         // --- Menu phase ---
         while (window.isOpen() && !menu.pressedPlay) {
             menu.updateMenu();
@@ -59,19 +45,44 @@ int main() {
 
         if (!window.isOpen()) break;
 
+        // --- Lose / return-to-menu phase ---
+
         if (game.getEndGame()) {
-            // for now, just exit like before
-            break;
+            menu.resetReturnMainRequest();
+
+            while (window.isOpen() && game.getEndGame() && !menu.getReturnToMenu()) {
+                // poll events directly so the window stays responsive
+                // (Closed / Escape) even though we're outside game.update()
+                while (window.pollEvent(event)) {
+                    if (event.type == sf::Event::Closed) {
+                        window.close();
+                    }
+                    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+                        window.close();
+                    }
+                }
+
+                if (!window.isOpen()) break;
+
+                menu.updateReturnButton();
+
+                window.clear();
+                menu.renderLoseText(window);
+                menu.renderReturnToMenuButton(window);
+                window.display();
+            }
         }
 
-        if (game.getReturnToMenu()) {
+        if (!window.isOpen()) break;
+
+        if (menu.getReturnToMenu()) {
             // loop back to menu — reset everything for next time
             game.resetGame();
             menu.pressedPlay = false;
+            menu.resetReturnMainRequest();
+
         }
     }
 
     return 0;
 }
-
-

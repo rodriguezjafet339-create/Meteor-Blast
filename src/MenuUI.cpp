@@ -9,6 +9,22 @@ void MenuUI::centerTextInShape(sf::Text& text, const sf::Shape& shape) {
 }
 //--------------------------------------------------------
 
+void MenuUI::inAllOtherTexts() {
+if(!this ->loseFont.loadFromFile("Fonts/Jersey10Charted-Regular.ttf")){
+    std::cout <<"Error in inMenu function"<<"\n";
+}
+this->loseText.setFont(this -> loseFont);
+this->loseText.setCharacterSize(40);
+this->loseText.setFillColor(sf::Color::White);
+this->loseText.setString("YOU FAILED\nEarth is Destroyed");
+
+sf::FloatRect tb = this->loseText.getLocalBounds();
+    this->loseText.setOrigin(tb.left + tb.width / 2.f, tb.top + tb.height / 2.f);
+    this->loseText.setPosition(this->window.getSize().x / 2.f, this->window.getSize().y / 2.f - 100.f);
+}
+
+//---------------------------------------------------------
+
 void MenuUI::inPlayButton() {
 float playButtonWidth = 200.f;
 float playButtonHeigth = 100.f;
@@ -32,6 +48,7 @@ MenuUI::MenuUI(sf::RenderWindow& window)
 : window(window)
 {
     //ctor
+    this ->inAllOtherTexts();
     this ->inPlayButton();
     this ->inPauseMenu();
 }
@@ -114,22 +131,30 @@ void MenuUI::resetReturnMainRequest() {
 this ->returnMainRequested = false;
 }
 //------------------------------------------------------------------
+
 void MenuUI::updateReturnButton() {
-this ->updateMP();
-if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        if (this ->mouseHeld == false) {
-                this ->mouseHeld = true;
-        if (this -> returnToMenuButton.getGlobalBounds().contains (this ->mousePosView)) {
-            this -> returnMainRequested = true;
-        }
+this->updateMP();
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (this->mouseHeld == false) {
+            this->mouseHeld = true;
+            if (this->returnToMenuButton.getGlobalBounds().contains(this->mousePosView)) {
+                this->returnMainRequested = true;
+            }
         }
     } else {
-    this ->mouseHeld = false;
+        this->mouseHeld = false;
     }
-
 }
 //---------------------------------------------------------------
 void MenuUI::renderReturnToMenuButton(sf::RenderTarget& target) {
 target.draw(this->returnToMenuButton);
 target.draw (this->returnToMenuText);
+}
+//--------------------------------------------------------------
+void MenuUI::renderLoseText(sf::RenderTarget& target){
+target.draw (this ->loseText);
+}
+
+void MenuUI::resetMouseHeld() {
+    this->mouseHeld = false;
 }

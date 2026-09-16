@@ -15,7 +15,7 @@ this ->maxHealth = 10;
 this ->health = 5;
 this ->enemySpawnTimerMax = 0.5f;
 this ->enemySpawnTimer = this ->enemySpawnTimerMax;
-this ->maxEnemies = 5;
+this ->maxEnemies = 10;
 this ->mouseHeld = false;
 this ->mouseHeld = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 this ->isPaused = false;
@@ -234,6 +234,7 @@ void Game::update(){
 
     if (this ->health <= 0) {
         this ->endGame = true;
+        window.clear();
     }
     }
 

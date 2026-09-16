@@ -22,6 +22,9 @@ class MenuUI
        sf::Text playText;
        sf::Font playFont;
 
+       sf::Text loseText;
+       sf::Font loseFont;
+
        sf::RectangleShape returnToMenuButton;
        sf::Text returnToMenuText;
        sf::Font returnToMenuFont;
@@ -49,10 +52,15 @@ class MenuUI
         void renderMenu ();
         void updateMenu ();
 
+        void inAllOtherTexts ();
+
         void inPauseMenu();
+        void resetMouseHeld();
         void renderReturnToMenuButton(sf::RenderTarget& target);
         void updateReturnButton ();
         void resetReturnMainRequest();
+
+        void renderLoseText (sf::RenderTarget& target);
 };
 
 #endif // MENUUI_H
