@@ -1,0 +1,53 @@
+# Compiled objects
+*.o
+*.obj
+*.lo
+*.slo
+
+# Libraries
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug and dependency files
+*.d
+*.pdb
+*.ilk
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Build folders (CMake, Make, etc.)
+build/
+bin/
+obj/
+out/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# IDE and editor files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.docloc
+*.vcxproj.user
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# Local secrets and config
+.env
+config.properties
