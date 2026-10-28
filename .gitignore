@@ -51,3 +51,5 @@ Thumbs.db
 # Local secrets and config
 .env
 config.properties
+Debug/
+obj/Debug
